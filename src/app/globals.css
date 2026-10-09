@@ -9,6 +9,7 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
 /* Perspective utilities for 3D card carousel */
@@ -20,21 +21,65 @@ body {
   perspective: 1500px;
 }
 
+.perspective-2000 {
+  perspective: 2000px;
+}
+
 .transform-style-preserve-3d {
   transform-style: preserve-3d;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* Custom Cloud animation & Shimmer */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-14px) translateX(8px);
+  }
 }
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(12px) translateX(-10px);
+  }
 }
-::-webkit-scrollbar-thumb {
-  background: #93c5fd;
-  border-radius: 4px;
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.08);
+  }
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #60a5fa;
+
+@keyframes shimmerBeam {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 9s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+.shimmer-mask {
+  mask-image: linear-gradient(to right, transparent, black 40%, black 60%, transparent);
 }
